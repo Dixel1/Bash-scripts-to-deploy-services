@@ -2,7 +2,7 @@
 
 # Description: Nextcloud deployment
 # Autor: Dixel - https://github.com/Dixel1
-# Version: v0.6b
+# Version: v0.7b
 
 # Update the system packages
 sudo apt-get update -y
@@ -16,9 +16,9 @@ wget https://download.nextcloud.com/server/releases/latest.zip -O nextcloud.zip
 # Unzip the zip file
 unzip nextcloud.zip
 
-# Copy the necessary files to the/var/www/html directory
-sudo mkdir /var/www/html/nexcloud
-sudo cp nextcloud /var/www/html/
+# Copy the necessary files to the /var/www/html directory
+sudo mkdir /var/www/html/nextcloud
+sudo cp -r nextcloud/. /var/www/html/nextcloud/
 
 # Create a MySQL user for Nextcloud
 sudo mysql -u root -e "CREATE DATABASE nextcloud;"
@@ -28,7 +28,7 @@ sudo mysql -u root -e "FLUSH PRIVILEGES;"
 
 # Configure Apache for Nextcloud
 sudo cp /var/www/html/nextcloud/config/config.sample.php /var/www/html/nextcloud/config/config.php
-sudo chown www-data:www-data /var/www/html/nextcloud/config/config.php
+sudo chown -R www-data:www-data /var/www/html/nextcloud/
 
 # Enable required modules in Apache
 sudo a2enmod rewrite
